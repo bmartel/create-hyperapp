@@ -16,7 +16,7 @@ const routes = {
 
 app({
   init: () => initialState,
-  view: state => <App {...state} />,
+  view: App,
   subscriptions: () => [
     Router({
       routes
