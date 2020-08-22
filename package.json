@@ -1,6 +1,6 @@
 {
-  "name": "create-hyperapp",
-  "version": "0.3.0",
+  "name": "@martel/create-hyperapp",
+  "version": "0.4.0",
   "description": "Create Hyperapps with no build configuration",
   "bin": {
     "create-hyperapp": "./bin/index.js"
@@ -27,12 +27,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/okwolf/create-hyperapp.git"
+    "url": "git+https://github.com/bmartel/create-hyperapp.git"
   },
-  "author": "Wolfgang Wedemeyer <wolf@okwolf.com>",
+  "author": "Brandon Martel <brandon@martel.dev>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/okwolf/create-hyperapp/issues"
+    "url": "https://github.com/bmartel/create-hyperapp/issues"
   },
-  "homepage": "https://github.com/okwolf/create-hyperapp"
+  "homepage": "https://github.com/bmartel/create-hyperapp"
 }

@@ -1,5 +1,28 @@
 import { h, app } from "hyperapp";
+import { router as Router, route } from "hyperapp-page-router";
 import "./index.css";
 import App from "./App";
+import * as serviceWorker from "./sw";
 
-app({ view: () => <App />, node: document.getElementById("app") });
+const initialState = { title: "Learn Hyperapp" };
+
+// Routes
+//
+// Maps to actions which resolve a route name
+
+const routes = {
+  "/": route("index", state => state)
+};
+
+app({
+  init: () => initialState,
+  view: state => <App {...state} />,
+  subscriptions: () => [
+    Router({
+      routes
+    })
+  ],
+  node: document.getElementById("app")
+});
+
+serviceWorker.register();

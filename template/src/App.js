@@ -2,7 +2,7 @@ import { h } from "hyperapp";
 import logo from "./logo.svg";
 import "./App.css";
 
-const App = () => (
+const App = state => (
   <div className="App">
     <header className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
@@ -15,7 +15,7 @@ const App = () => (
         target="_blank"
         rel="noopener noreferrer"
       >
-        Learn Hyperapp
+        {state.title}
       </a>
     </header>
   </div>

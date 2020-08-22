@@ -27,7 +27,11 @@ console.log(`Creating a Hyperapp in ${green(projectPath)}.`);
 console.log();
 console.log("Installing packages. This might take a couple of minutes.");
 console.log(
-  `Installing ${cyan("hyperapp")} and ${cyan("hyperapp-scripts")}...`
+  `Installing ${cyan("hyperapp")}, ${cyan("@martel/hyperapp-scripts")}, ${cyan(
+    "@martel/hyperapp-fx"
+  )}, ${cyan("hyperapp-page-router")}, ${cyan("hyperapp-render")} and ${cyan(
+    "workbox-build"
+  )}...`
 );
 
 fs.copySync(templatePath, projectPath);
@@ -48,8 +52,13 @@ const installPackageWithFlags = (package, ...args) => {
     );
   }
 };
+
 installPackageWithFlags("hyperapp", "--save");
-installPackageWithFlags("hyperapp-scripts", "--save-dev");
+installPackageWithFlags("hyperapp-page-router", "--save");
+installPackageWithFlags("hyperapp-render", "--save");
+installPackageWithFlags("@martel/hyperapp-fx", "--save");
+installPackageWithFlags("@martel/hyperapp-scripts", "--save-dev");
+installPackageWithFlags("workbox-build", "--save-dev");
 
 console.log();
 console.log(`Success! Created ${name} in ${process.cwd()}`);
