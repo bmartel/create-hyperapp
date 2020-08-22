@@ -8,7 +8,7 @@ import "./App.css";
 const Loading = ({error}) =>
   span({}, error ? text(`Error! ${error}`) : text(`loading...`));
 
-const HyperloadOutlet = (views, state) =>
+const HyperloadOutlet = (state, views) =>
   Hyperload({
     key: state.router.current,
     module: views[state.router.current],
