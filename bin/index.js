@@ -29,9 +29,9 @@ console.log("Installing packages. This might take a couple of minutes.");
 console.log(
   `Installing ${cyan("hyperapp")}, ${cyan("@hyperapp/html")}, ${cyan(
     "@martel/hyperapp-scripts"
-  )}, ${cyan("@martel/hyperapp-fx")}, ${cyan(
-    "hyperapp-page-router"
-  )} and ${cyan("workbox-build")}...`
+  )}, ${cyan("@martel/hyperapp-fx")}, ${cyan("hyperapp-page-router")}, ${cyan(
+    "workbox-build"
+  )} and ${cyan("tailwindcss")} ...`
 );
 
 fs.copySync(templatePath, projectPath);
@@ -59,6 +59,9 @@ installPackageWithFlags("hyperapp-page-router", "--save");
 installPackageWithFlags("@martel/hyperapp-fx", "--save");
 installPackageWithFlags("@martel/hyperapp-scripts", "--save-dev");
 installPackageWithFlags("workbox-build", "--save-dev");
+installPackageWithFlags("tailwindcss", "--save-dev");
+installPackageWithFlags("chokidar-cli", "--save-dev");
+installPackageWithFlags("npm-run-all", "--save-dev");
 
 console.log();
 console.log(`Success! Created ${name} in ${process.cwd()}`);

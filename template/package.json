@@ -5,9 +5,14 @@
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
-    "start": "hyperapp-scripts start",
-    "build": "hyperapp-scripts build && npm run build-sw && npm run clean-cra-sw",
+    "start": "npm-run-all build:css --parallel watch:css start:hyperapp",
+    "start:hyperapp": "hyperapp-scripts start",
+    "build:hyperapp": "hyperapp-scripts build",
+    "build": "npm-run-all build:hyperapp build-sw clean-cra-sw",
     "test": "hyperapp-scripts test",
+    "prebuild": "npm run build:css",
+    "build:css": "tailwind build src/index.css -o src/index.output.css",
+    "watch:css": "chokidar 'src/**/*.css' 'src/**/*.scss' --ignore src/index.output.css -c 'npm run build:css'",
     "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
     "build-sw": "node ./src/sw/sw-build.js"
   },

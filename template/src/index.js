@@ -1,6 +1,6 @@
 import { h, app } from "hyperapp";
 import { router as Router, route } from "hyperapp-page-router";
-import "./index.css";
+import "./index.output.css";
 import App from "./App";
 import * as serviceWorker from "./sw";
 
