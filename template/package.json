@@ -12,7 +12,7 @@
     "test": "hyperapp-scripts test",
     "prebuild": "npm run build:css",
     "build:css": "tailwind build src/index.css -o src/index.output.css",
-    "watch:css": "chokidar 'src/tailwind.config.js' 'src/**/*.css' 'src/**/*.scss' --ignore src/index.output.css -c 'npm run build:css'",
+    "watch:css": "chokidar tailwind.config.js 'src/**/*.css' 'src/**/*.scss' --ignore src/index.output.css -c 'npm run build:css'",
     "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
     "build-sw": "node ./src/sw/sw-build.js"
   },
