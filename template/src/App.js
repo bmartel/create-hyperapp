@@ -5,16 +5,16 @@ import {a, code, div, img, header, p, span} from "@hyperapp/html";
 import logo from "./logo.svg";
 import "./App.css";
 
-const Loading = ({error, otherProps}) =>
-  span({}, error ? text(`Error! ${error}`) : text(`loading ${otherProps}...`));
+const Loading = ({error}) =>
+  span({}, error ? text(`Error! ${error}`) : text(`loading...`));
 
-const HyperloadOutlet = (state) =>
+const HyperloadOutlet = (views, state) =>
   Hyperload({
     key: state.router.current,
-    module: pages[state.router.current],
+    module: views[state.router.current],
     loading: Loading,
     otherProps: state,
-  }),
+  })
 
 const App = (state) =>
   div({class: "App"}, [
