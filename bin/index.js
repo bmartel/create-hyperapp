@@ -2,8 +2,8 @@
 
 const fs = require("fs-extra");
 const path = require("path");
-const { spawnSync } = require("child_process");
-const { bold, red, cyan, green } = require("colorette");
+const {spawnSync} = require("child_process");
+const {bold, red, cyan, green} = require("colorette");
 
 const name = process.argv[2] || "";
 
@@ -29,7 +29,7 @@ console.log("Installing packages. This might take a couple of minutes.");
 console.log(
   `Installing ${cyan("hyperapp")}, ${cyan("@hyperapp/html")}, ${cyan(
     "@martel/hyperapp-scripts"
-  )}, ${cyan("@martel/hyperapp-fx")}, ${cyan("hyperapp-page-router")}, ${cyan(
+  )}, ${cyan("@martel/hyperapp-fx")}, ${cyan("@martel/hyperload")}, ${cyan("hyperapp-page-router")}, ${cyan(
     "workbox-build"
   )} and ${cyan("tailwindcss")} ...`
 );
@@ -38,7 +38,7 @@ fs.copySync(templatePath, projectPath);
 const packageJsonPath = path.join(projectPath, "package.json");
 const packageJson = require(packageJsonPath);
 packageJson.name = name;
-fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
+fs.writeJsonSync(packageJsonPath, packageJson, {spaces: 2});
 
 const installPackageWithFlags = (package, ...args) => {
   const installResults = spawnSync("npm", ["install", package, ...args], {
@@ -56,6 +56,7 @@ const installPackageWithFlags = (package, ...args) => {
 installPackageWithFlags("hyperapp", "--save");
 installPackageWithFlags("@hyperapp/html", "--save");
 installPackageWithFlags("hyperapp-page-router", "--save");
+installPackageWithFlags("@martel/hyperload", "--save");
 installPackageWithFlags("@martel/hyperapp-fx", "--save");
 installPackageWithFlags("@martel/hyperapp-scripts", "--save-dev");
 installPackageWithFlags("workbox-build", "--save-dev");
