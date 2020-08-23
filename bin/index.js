@@ -2,8 +2,8 @@
 
 const fs = require("fs-extra");
 const path = require("path");
-const {spawnSync} = require("child_process");
-const {bold, red, cyan, green} = require("colorette");
+const { spawnSync } = require("child_process");
+const { bold, red, cyan, green } = require("colorette");
 
 const name = process.argv[2] || "";
 
@@ -23,46 +23,52 @@ if (fs.existsSync(projectPath)) {
   );
 }
 
+const dependencies = [
+  "hyperapp",
+  "@hyperapp/html",
+  "hyperapp-page-router",
+  "@martel/hyperload",
+  "@martel/hyperapp-fx"
+];
+
+const devDependencies = [
+  "@martel/hyperapp-scripts",
+  "workbox-build",
+  "tailwindcss",
+  "chokidar-cli",
+  "npm-run-all"
+];
+
 console.log(`Creating a Hyperapp in ${green(projectPath)}.`);
 console.log();
 console.log("Installing packages. This might take a couple of minutes.");
 console.log(
-  `Installing ${cyan("hyperapp")}, ${cyan("@hyperapp/html")}, ${cyan(
-    "@martel/hyperapp-scripts"
-  )}, ${cyan("@martel/hyperapp-fx")}, ${cyan("@martel/hyperload")}, ${cyan("hyperapp-page-router")}, ${cyan(
-    "workbox-build"
-  )} and ${cyan("tailwindcss")} ...`
+  `Installing ${[...dependencies, ...devDependencies]
+    .map(dep => `${cyan(dep)}`)
+    .join(", ")} ...`
 );
 
 fs.copySync(templatePath, projectPath);
 const packageJsonPath = path.join(projectPath, "package.json");
 const packageJson = require(packageJsonPath);
 packageJson.name = name;
-fs.writeJsonSync(packageJsonPath, packageJson, {spaces: 2});
+fs.writeJsonSync(packageJsonPath, packageJson, { spaces: 2 });
 
-const installPackageWithFlags = (package, ...args) => {
-  const installResults = spawnSync("npm", ["install", package, ...args], {
+const installPackages = (packages, ...args) => {
+  const results = spawnSync("npm", ["install", ...packages, ...args], {
     cwd: projectPath,
     stdio: "inherit",
     shell: true
   });
-  if (installResults.error) {
+  if (results.error) {
     exitWithError(
-      `Error while installing ${cyan(package)}: ${installResults.error}`
+      `Error while installing ${cyan(packages.join(", "))}: ${results.error}`
     );
   }
 };
 
-installPackageWithFlags("hyperapp", "--save");
-installPackageWithFlags("@hyperapp/html", "--save");
-installPackageWithFlags("hyperapp-page-router", "--save");
-installPackageWithFlags("@martel/hyperload", "--save");
-installPackageWithFlags("@martel/hyperapp-fx", "--save");
-installPackageWithFlags("@martel/hyperapp-scripts", "--save-dev");
-installPackageWithFlags("workbox-build", "--save-dev");
-installPackageWithFlags("tailwindcss", "--save-dev");
-installPackageWithFlags("chokidar-cli", "--save-dev");
-installPackageWithFlags("npm-run-all", "--save-dev");
+installPackages(dependencies, "--save");
+installPackages(devDependencies, "--save-dev");
 
 console.log();
 console.log(`Success! Created ${name} in ${process.cwd()}`);
